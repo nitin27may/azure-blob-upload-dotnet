@@ -9,4 +9,6 @@ Frontend build using Angular, bootstrap. We have also integrate Ngx-bootstrap bu
 
 To run this applicaiton, update the Azure Storage connction string in appsettings.Development.json or appsettings.json based in which mode you are running the project.
 
-Then in UI, you have to run `npm start`  and one `proxy.config.json` is configured which have a property 'target' which is address of your api.  
+Then in UI, you have to run `npm start`.
+
+Note: Please update api endpoint as 'target' in `proxy.config.json` file.  
