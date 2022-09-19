@@ -1,6 +1,6 @@
-# **Work in Progress**
-[WIP]
-### About
+
+# Azure Blob Upload (dotnet, Angular)
+## About
 A complete example to upload file in blob containers, list all files from a container and view a file using SAS token. This example inclued backend (API) and frontend:
 1. API (dotnet 6)
 2. Frontend (Angular 14.2.1)
