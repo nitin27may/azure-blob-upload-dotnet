@@ -10,7 +10,7 @@ export class UploadService {
   getAllFiles() {
     return this.httpClient.get('/api/File/videos').pipe(
       map((data: any) => {
-        data.sort((a: any, b: any) => {
+        return data.sort((a: any, b: any) => {
           return new Date(b.createdOn).getTime() - new Date(a.createdOn).getTime();
         })
       }),
@@ -25,9 +25,6 @@ export class UploadService {
     });
 
     return this.httpClient.request(uploadReq).pipe(
-      map((data: any) => {
-        return data.body.fileURL;
-      }),
       catchError(this.handleErrorObservable)
     );
 
