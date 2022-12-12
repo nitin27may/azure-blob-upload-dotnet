@@ -1,6 +1,8 @@
-# AzureBlobUpload
+# Azure Blob Upload
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+Front end build using Angular, bootstrap. We have also integrate Ngx-bootstrap but not used much as this is just one page example, from where we are uploading a file and then showing the uploaded file for 2.5 seconds and then displaying all blobs in a table. For now we have used image tag to display all blobs considering that we are uploading the images.
+
+Angular version used. 14.2.1
 
 ## Development server
 
@@ -14,13 +16,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 
