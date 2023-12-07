@@ -1,6 +1,5 @@
 using AzureBlobApi.Middleware;
 using AzureBlobApi.Services;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 

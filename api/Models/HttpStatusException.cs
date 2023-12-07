@@ -1,14 +1,13 @@
 ﻿using System.Net;
 
-namespace AzureBlobApi.Models
-{
-    public class HttpStatusException : Exception
-    {
-        public HttpStatusCode Status { get; private set; }
+namespace AzureBlobApi.Models;
 
-        public HttpStatusException(HttpStatusCode status, string msg) : base(msg)
-        {
-            Status = status;
-        }
+public class HttpStatusException : Exception
+{
+    public HttpStatusCode Status { get; private set; }
+
+    public HttpStatusException(HttpStatusCode status, string msg) : base(msg)
+    {
+        Status = status;
     }
 }

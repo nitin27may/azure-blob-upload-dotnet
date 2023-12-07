@@ -3,41 +3,40 @@ using AzureBlobApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
-namespace AzureBlobApi.Controllers
+namespace AzureBlobApi.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class FileController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class FileController : ControllerBase
+    private readonly IBlobService _blobService;
+
+    private readonly ILogger _logger;
+
+    public FileController(IBlobService blobService, ILogger<FileController> logger)
     {
-        private readonly IBlobService _blobService;
+        _blobService = blobService;
+        _logger = logger;
+    }
 
-        private readonly ILogger _logger;
-
-        public FileController(IBlobService blobService, ILogger<FileController> logger)
+    [HttpPost, DisableRequestSizeLimit]
+    public async Task<IActionResult> UploadAsync()
+    {
+        var formCollection = await Request.ReadFormAsync();
+        var file = formCollection.Files.First();
+        if (file.Length > 0)
         {
-            _blobService = blobService;
-            _logger = logger;
+            string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            string fileURL = await _blobService.UploadAsync(file.OpenReadStream(), "videos", fileName.AppendTimeStamp(), file.ContentType);
+            return Ok(new { fileURL });
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadAsync()
-        {
-            var formCollection = await Request.ReadFormAsync();
-            var file = formCollection.Files.First();
-            if (file.Length > 0)
-            {
-                string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                string fileURL = await _blobService.UploadAsync(file.OpenReadStream(), "videos", fileName.AppendTimeStamp(), file.ContentType);
-                return Ok(new { fileURL });
-            }
+        return BadRequest();
+    }
 
-            return BadRequest();
-        }
-
-        [HttpGet("{containerName}")]
-        public async Task<IActionResult> GetFiles(string containerName)
-        {
-            return Ok(await _blobService.GetFiles(containerName, null));
-        }
+    [HttpGet("{containerName}")]
+    public async Task<IActionResult> GetFiles(string containerName)
+    {
+        return Ok(await _blobService.GetFiles(containerName, null));
     }
 }
